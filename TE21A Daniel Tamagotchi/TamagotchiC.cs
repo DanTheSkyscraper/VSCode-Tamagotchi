@@ -1,12 +1,10 @@
-﻿using System.Net;
-
-public class TamagotchiC
+﻿public class TamagotchiC
 {
-    private int tamagotchiHunger = 0;
+    private int Hunger = 0;
 
-    private int tamagotchiBoredom = 0;
+    private int Boredom = 0;
 
-    private int tamagotchiMood = 50;
+    private int Mood = 50;
 
     private List<string> words = new List<string>() {"hellö"};
     
@@ -16,59 +14,59 @@ public class TamagotchiC
 
     public string playerName;
 
-    private bool isAlive = true; //Change??
+    private bool isAlive = true;
 
 
     //----------
 
     public void Feed()
     {
-        Console.WriteLine("Your Tamagotchi eats the food you gave them. They are not as hungry as before.");
+        Console.WriteLine("\nYour Tamagotchi eats the food you gave them. They are not as hungry as before.");
         ReduceHunger();
     }
 
     public void Play()
     {
-        Console.WriteLine("You play with your Tamagotchi. Their mood has improved!");
+        Console.WriteLine("\nYou play with your Tamagotchi. Their mood has improved!");
         ImproveMood();
     }
 
     public void Hi()
     {
         int i = Generator.Next(words.Count);
-        Console.WriteLine($"Your Tamagotchi says: {words[i]}");
-        ReduceBoredom();
+        Console.WriteLine($"\nYour Tamagotchi says: {words[i]}");
         ImproveMood();
+        ReduceBoredom();
     }
 
-    public void Teach(string tamagotchiWord)
+    public void Teach(string word)
     {
-        Console.WriteLine($"You taught your Tamagotchi a new word, which is '{tamagotchiWord}'. {tamagotchiName} is eager to learn it.");
-        words.Add(tamagotchiWord);
-        ReduceBoredom();
+        Console.WriteLine($"\nYou taught your Tamagotchi a new word, which is '{word}'. {tamagotchiName} is eager to learn it.");
+        words.Add(word);
         ImproveMood();
+        ReduceBoredom();
     }
 
     public void Tick()
     {
-        tamagotchiHunger++;
-        tamagotchiBoredom++;
-        tamagotchiMood--;
+        Hunger++;
+        Boredom++;
+        Mood--;
 
 
-        if(tamagotchiHunger > 10 & tamagotchiBoredom > 10)
+        if(Hunger > 10 & Boredom > 10)
         {
             isAlive = false;
-            Console.WriteLine($"Your Tamagotchi {tamagotchiName} has died! How could you let this happen?!");
+            Console.WriteLine($"\nYour Tamagotchi {tamagotchiName} has died! How could you let this happen?!");
         }
 
-        if (tamagotchiMood < 25)
+        if (Mood < 25)
         {
-            Console.WriteLine($"Your Tamagotchi {tamagotchiName} is upset. Turn that frown upside down!");
+            Console.WriteLine($"\nYour Tamagotchi {tamagotchiName} is upset. Turn that frown upside down!");
         }
         else
         {
-            Console.WriteLine($"Your Tamagotchi {tamagotchiName} is happy. Look at that ball of sunshine!");
+            Console.WriteLine($"\nYour Tamagotchi {tamagotchiName} is happy. Look at that ball of sunshine!");
         }
     }
 
@@ -83,9 +81,9 @@ public class TamagotchiC
             Console.WriteLine($"\nTamagotchi '{tamagotchiName}' status: Dead");
         }
 
-        Console.WriteLine($"\nHunger: {tamagotchiHunger}");
-        Console.WriteLine($"Boredom: {tamagotchiBoredom}");
-        Console.WriteLine($"Mood: {tamagotchiMood}");
+        Console.WriteLine($"\nHunger: {Hunger}");
+        Console.WriteLine($"Boredom: {Boredom}");
+        Console.WriteLine($"Mood: {Mood}");
 
         
     
@@ -98,40 +96,59 @@ public class TamagotchiC
 
     private void ReduceBoredom()
     {
-        Console.WriteLine($"Your Tamagotchi '{tamagotchiName}' is not as bored anymore!");
-        tamagotchiBoredom -= 2;
+        Console.WriteLine($"\nYour Tamagotchi '{tamagotchiName}' is not as bored anymore!");
+        Boredom -= 2;
 
-        if (tamagotchiBoredom < 0)
+        if (Boredom < 0)
         {
-            tamagotchiBoredom = 0;
+            Boredom = 0;
         }
     }
 
     private void ImproveMood()
     {
-        Console.WriteLine("The mood of your tamagotchi has improved!");
-        tamagotchiMood += 2;
+        Console.WriteLine("\nThe mood of your tamagotchi has improved!");
+        Mood += 2;
 
-        if (tamagotchiMood < 0)
+        if (Mood < 0)
         {
-            tamagotchiMood = 0;
+            Mood = 0;
         }
-        else if(tamagotchiMood > 50)
+        else if(Mood > 50)
         {
-            tamagotchiMood = 50;
+            Mood = 50;
         }
     }
 
     private void ReduceHunger()
     {
-        Console.WriteLine($"Your Tamagotchi '{tamagotchiName}' is not as hungry anymore!");
-        tamagotchiHunger -= 2;
+        Console.WriteLine($"\nYour Tamagotchi '{tamagotchiName}' is not as hungry anymore!");
+        Hunger -= 2;
 
-        if (tamagotchiHunger < 0)
+        if (Hunger < 0)
         {
-            tamagotchiHunger = 0;
+            Hunger = 0;
         }
     }
 
+    public static string PlayerGameName()
+    {
+        string playerName;
+
+        Console.WriteLine("\nMy name is:");
+        playerName = Console.ReadLine();
+        
+        return playerName;
+    }
+
+    public static string TamagotchiGameName()
+    {
+        string tamagotchiName;
+
+        Console.WriteLine("\nThe name of your Tamagotchi is:");
+        tamagotchiName = Console.ReadLine();
+
+        return tamagotchiName;
+    }
 
 }
