@@ -18,17 +18,22 @@ while (restartGame == "y")
 
     while(tama.GetAlive() == true)
     {
+        Console.WriteLine("\n\n------------------------------------------");
+
         tama.PrintStats();
+        tama.Tick();
 
-        Console.WriteLine("\nYour Tamagotchi is looking up at you anticipation.");
+        Console.WriteLine("\nYour Tamagotchi is looking up at you in anticipation.");
 
-        Console.WriteLine("\n Here, the player may choose by typing the following commands in lower case: 'feed', 'greet', 'teach' or 'play'.");
+        Console.WriteLine("\nHere the player may choose by typing the following commands in lower case: 'feed', 'greet', 'teach' or 'play'. To do nothing, simply press 'enter'.");
 
         Console.WriteLine("\nChoose your next action...");
         Console.WriteLine($"\nChoice No.1: Feed {tama.tamagotchiName}");
         Console.WriteLine($"Choice No.2: Greet {tama.tamagotchiName}");
         Console.WriteLine($"Choice No.3: Teach {tama.tamagotchiName}");
         Console.WriteLine($"Choice No.4: Play with {tama.tamagotchiName}");
+        Console.WriteLine("Choice No.5: Do nothing...");
+
         string playerChoice = Console.ReadLine();
 
 
@@ -48,14 +53,28 @@ while (restartGame == "y")
             string tamagotchiWord = Console.ReadLine();
             tama.Teach(tamagotchiWord);
         }
-        else
+        else if (playerChoice == "play")
         {
             Console.WriteLine($"\nYou decide to play with {tama.tamagotchiName}. They are incredibly happy to spend time playing with you!");
             tama.Play();
         }
+        else
+        {
+            Console.WriteLine($"\nYou decide to do nothing. {tama.tamagotchiName} patiently waits.");
+        }
 
-        Console.WriteLine("\nDo you want to play again? [y/n]");
-        restartGame = Console.ReadLine();
+        tama.HungerStatusCheck();
+        tama.BoredomStatusCheck();
+
+        if(tama.GetAlive() == false)
+        {
+            Console.WriteLine("\n-----------------------------------");
+            Console.WriteLine($"\nYour Tamagotchi {tama.tamagotchiName} has died! How could you let this happen?!");
+        }
     }
+    
+
+    Console.WriteLine("\nDo you want to play again? [y/n]");
+    restartGame = Console.ReadLine();
 }
 Console.ReadLine();

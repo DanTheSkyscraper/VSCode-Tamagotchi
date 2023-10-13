@@ -17,7 +17,7 @@
     private bool isAlive = true;
 
 
-    //----------
+    //-------------------------------
 
     public void Feed()
     {
@@ -53,26 +53,35 @@
         Boredom++;
         Mood--;
 
-
-        if(Hunger > 10 & Boredom > 10)
-        {
-            isAlive = false;
-            Console.WriteLine($"\nYour Tamagotchi {tamagotchiName} has died! How could you let this happen?!");
-        }
-
         if (Mood < 25)
         {
-            Console.WriteLine($"\nYour Tamagotchi {tamagotchiName} is upset. Turn that frown upside down!");
+            Console.WriteLine($"\n//Your Tamagotchi {tamagotchiName} is upset. Turn that frown upside down!//");
         }
         else
         {
-            Console.WriteLine($"\nYour Tamagotchi {tamagotchiName} is happy. Look at that ball of sunshine!");
+            Console.WriteLine($"\n//Your Tamagotchi {tamagotchiName} is happy. Look at that ball of sunshine!//");
+        }
+    }
+
+    public void HungerStatusCheck()
+    {
+        if(Hunger > 10)
+        {
+            isAlive = false;
+        }
+    }
+
+    public void BoredomStatusCheck()
+    {
+        if(Boredom > 10)
+        {
+            isAlive = false;
         }
     }
 
     public void PrintStats()
     {
-        if (isAlive)
+        if (isAlive == true)
         {
             Console.WriteLine($"\nTamagotchi '{tamagotchiName}' status: Alive");
         }
@@ -107,7 +116,6 @@
 
     private void ImproveMood()
     {
-        Console.WriteLine("\nThe mood of your tamagotchi has improved!");
         Mood += 2;
 
         if (Mood < 0)
@@ -122,7 +130,6 @@
 
     private void ReduceHunger()
     {
-        Console.WriteLine($"\nYour Tamagotchi '{tamagotchiName}' is not as hungry anymore!");
         Hunger -= 2;
 
         if (Hunger < 0)
